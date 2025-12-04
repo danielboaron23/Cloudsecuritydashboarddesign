@@ -1,1 +1,11 @@
-# repo-template
+
+  # Cloud Security Dashboard Design
+
+  This is a code bundle for Cloud Security Dashboard Design. The original project is available at https://www.figma.com/design/QLA4Z113lyh6QTTU2NFguy/Cloud-Security-Dashboard-Design.
+
+  ## Running the code
+
+  Run `npm i` to install the dependencies.
+
+  Run `npm run dev` to start the development server.
+  
