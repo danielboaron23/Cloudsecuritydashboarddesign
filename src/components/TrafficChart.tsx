@@ -5,7 +5,13 @@ interface TrafficChartProps {
   data: any[];
 }
 
-export function TrafficChart({ data }: TrafficChartProps) {
+export function TrafficChart({ data, selectedDate = new Date(2025, 6, 1) }: { data: any[], selectedDate?: Date }) {
+  const getLabel = (offsetDays: number) => {
+    const date = new Date(selectedDate);
+    date.setDate(1 + offsetDays); // Start from 1st of month + offset
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  };
+
   return (
     <div className="w-full h-full">
       <ResponsiveContainer width="100%" height="100%">
@@ -18,12 +24,10 @@ export function TrafficChart({ data }: TrafficChartProps) {
             tick={{ fill: '#5b626e', fontSize: 12 }}
             ticks={['0:00', '6:00', '12:00', '18:00']}
             tickFormatter={(value) => {
-               // Mocking the dates from the design (Jul 7 - Jul 28)
-               // Since we just passed hours, let's map them mockingly or just use index
-               if (value === '0:00') return 'Jul 7';
-               if (value === '6:00') return 'Jul 14';
-               if (value === '12:00') return 'Jul 21';
-               return 'Jul 28';
+               if (value === '0:00') return getLabel(6);  // ~1st week
+               if (value === '6:00') return getLabel(13); // ~2nd week
+               if (value === '12:00') return getLabel(20); // ~3rd week
+               return getLabel(27); // ~4th week
             }}
           />
           <YAxis 

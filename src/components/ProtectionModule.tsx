@@ -3,6 +3,8 @@ import { Shield, Info, Zap, Globe, Download, ChevronDown } from 'lucide-react';
 import { TrafficChart } from './TrafficChart';
 import svgPaths from '../imports/svg-f1cvh6yttf';
 import { cn } from '../utils/cn';
+import { Calendar } from './ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 
 interface ProtectionModuleProps {
   title: string;
@@ -12,6 +14,7 @@ interface ProtectionModuleProps {
 }
 
 export function ProtectionModule({ title, type, plan, data }: ProtectionModuleProps) {
+  const [date, setDate] = React.useState<Date | undefined>(new Date(2025, 6, 1));
   const isWAF = type === 'WAF';
 
   return (
@@ -206,15 +209,27 @@ export function ProtectionModule({ title, type, plan, data }: ProtectionModulePr
                  </div>
                  <div className="flex items-center gap-2">
                     <button className="text-[#5b626e]"><Download size={18} /></button>
-                    <div className="flex items-center gap-2 px-3 py-1.5 border border-[#d4d6db] rounded bg-white text-xs text-[#264769]">
-                       <span>Jul 2025</span>
-                       <ChevronDown size={14} />
-                    </div>
+                    <Popover>
+                       <PopoverTrigger asChild>
+                          <button className="flex items-center gap-2 px-3 py-1.5 border border-[#d4d6db] rounded bg-white text-xs text-[#264769] hover:bg-[#f5f6f8] transition-colors">
+                             <span>{date ? date.toLocaleString('default', { month: 'short', year: 'numeric' }) : 'Pick a date'}</span>
+                             <ChevronDown size={14} />
+                          </button>
+                       </PopoverTrigger>
+                       <PopoverContent className="w-auto p-0" align="end">
+                          <Calendar
+                             mode="single"
+                             selected={date}
+                             onSelect={setDate}
+                             initialFocus
+                          />
+                       </PopoverContent>
+                    </Popover>
                  </div>
               </div>
               
               <div className="flex-1 w-full min-h-[200px]">
-                 <TrafficChart data={data} />
+                 <TrafficChart data={data} selectedDate={date} />
               </div>
            </div>
 

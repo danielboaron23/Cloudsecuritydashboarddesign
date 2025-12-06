@@ -135,51 +135,91 @@ export function AgenticSummary() {
         </div>
 
         {/* Risk Matrix Section */}
-        <div className="grid grid-cols-3 gap-5">
-            <div className="col-span-2">
-                <Card title="Risk Matrix">
-                    <div className="mt-6 flex">
+        <div className="flex gap-6">
+            <div className="w-[65%]">
+                <Card title={
+                    <div className="flex gap-3 items-center w-full">
+                        <span className="font-medium text-[#264769] text-[16px] whitespace-nowrap">
+                            Risks Count by Severity × Business Priority Matrix
+                        </span>
+                        <span className="bg-[#e1e3e6] text-[#015ecb] text-[12px] px-2 py-0.5 rounded text-center font-normal">
+                            156
+                        </span>
+                    </div>
+                }>
+                    <div className="flex gap-6 p-2 items-stretch h-full">
                          {/* Y Axis Label */}
-                         <div className="flex items-center justify-center mr-4">
-                             <span className="text-xs font-medium text-[#5b626e] -rotate-90 whitespace-nowrap">Business Priority</span>
+                         <div className="flex items-center justify-center w-6 shrink-0">
+                             <span className="-rotate-90 whitespace-nowrap text-sm font-normal text-[#5b626e]">Severity</span>
                          </div>
                          
-                         <div className="flex-1 flex flex-col gap-2">
-                             {/* Matrix Grid */}
-                             <div className="grid grid-cols-4 gap-2">
-                                 {/* Headers */}
-                                 <div className="col-start-2 text-center text-xs font-medium text-[#5b626e]">Low</div>
-                                 <div className="text-center text-xs font-medium text-[#5b626e]">Medium</div>
-                                 <div className="text-center text-xs font-medium text-[#5b626e]">High</div>
-                                 <div className="text-center text-xs font-medium text-[#5b626e]">Critical</div>
-
-                                 {/* High Priority Row */}
-                                 <div className="flex items-center justify-end pr-2 text-xs font-medium text-[#5b626e]">High</div>
-                                 <MatrixCell color="yellow" count={4} />
-                                 <MatrixCell color="orange" count={8} />
-                                 <MatrixCell color="red" count={3} />
-                                 <MatrixCell color="red" count={1} />
-
-                                 {/* Medium Priority Row */}
-                                 <div className="flex items-center justify-end pr-2 text-xs font-medium text-[#5b626e]">Medium</div>
-                                 <MatrixCell color="green" count={12} />
-                                 <MatrixCell color="yellow" count={6} />
-                                 <MatrixCell color="orange" count={2} />
-                                 <MatrixCell color="red" count={0} />
-
-                                 {/* Low Priority Row */}
-                                 <div className="flex items-center justify-end pr-2 text-xs font-medium text-[#5b626e]">Low</div>
-                                 <MatrixCell color="green" count={25} />
-                                 <MatrixCell color="green" count={14} />
-                                 <MatrixCell color="yellow" count={5} />
-                                 <MatrixCell color="orange" count={1} />
+                         {/* Matrix Content */}
+                         <div className="flex-1 flex flex-col gap-6 justify-center">
+                             {/* Grid Container */}
+                             <div className="flex flex-col gap-3">
+                                 {/* Row 1: High */}
+                                 <div className="flex items-center gap-3">
+                                     <span className="w-12 text-right text-sm font-medium text-[#264769] shrink-0">High</span>
+                                     <div className="flex-1 grid grid-cols-3 gap-3">
+                                         <MatrixCellNew color="orange" count={8} />
+                                         <MatrixCellNew color="pink" count={4} />
+                                         <MatrixCellNew color="red" count={3} />
+                                     </div>
+                                 </div>
+                                 
+                                 {/* Row 2: Medium */}
+                                 <div className="flex items-center gap-3">
+                                     <span className="w-12 text-right text-sm font-medium text-[#264769] shrink-0">Medium</span>
+                                     <div className="flex-1 grid grid-cols-3 gap-3">
+                                         <MatrixCellNew color="orange" count={8} />
+                                         <MatrixCellNew color="pink" count={4} />
+                                         <MatrixCellNew color="pink" count={10} />
+                                     </div>
+                                 </div>
+                                 
+                                 {/* Row 3: Low */}
+                                 <div className="flex items-center gap-3">
+                                     <span className="w-12 text-right text-sm font-medium text-[#264769] shrink-0">Low</span>
+                                     <div className="flex-1 grid grid-cols-3 gap-3">
+                                         <MatrixCellNew color="cream" count={11} />
+                                         <MatrixCellNew color="orange" count={8} />
+                                         <MatrixCellNew color="orange" count={2} />
+                                     </div>
+                                 </div>
                              </div>
-                             <div className="text-center text-xs font-medium text-[#5b626e] mt-2">Severity</div>
+                             
+                             {/* X Axis Labels */}
+                             <div className="flex flex-col gap-2 pl-[60px]"> {/* 48px (w-12) + 12px (gap-3) = 60px offset */}
+                                 <div className="grid grid-cols-3 gap-3">
+                                     <span className="text-center text-sm font-medium text-[#264769]">Low</span>
+                                     <span className="text-center text-sm font-medium text-[#264769]">Medium</span>
+                                     <span className="text-center text-sm font-medium text-[#264769]">High</span>
+                                 </div>
+                                 <div className="flex justify-center mt-1">
+                                     <span className="text-sm font-normal text-[#5b626e]">Business Priority</span>
+                                 </div>
+                             </div>
+                         </div>
+                         
+                         {/* Legend */}
+                         <div className="flex flex-col gap-3 justify-start pt-10 min-w-[80px] shrink-0">
+                             <div className="flex gap-2 items-center">
+                                 <div className="bg-[#ec0139] rounded-full size-3" />
+                                 <span className="text-xs text-[#5b626e]">Critical</span>
+                             </div>
+                             <div className="flex gap-2 items-center">
+                                 <div className="bg-[#ffe5eb] rounded-full size-3" />
+                                 <span className="text-xs text-[#5b626e]">High</span>
+                             </div>
+                             <div className="flex gap-2 items-center">
+                                 <div className="bg-[#ffe5c2] rounded-full size-3" />
+                                 <span className="text-xs text-[#5b626e]">Medium</span>
+                             </div>
                          </div>
                     </div>
                 </Card>
             </div>
-            <div className="col-span-1 flex flex-col gap-5">
+            <div className="w-[35%] flex flex-col gap-4">
                  <SummaryCard label="Critical Risks" count="4" subLabel="Requiring immediate attention" color="red" />
                  <SummaryCard label="High Priority Systems" count="12" color="orange" />
                  <SummaryCard label="Mitigated Risks" count="156" color="green" />
@@ -287,11 +327,30 @@ export function AgenticSummary() {
 
 // Subcomponents
 
-function Card({ title, children, className = "" }: { title: string; children: React.ReactNode; className?: string }) {
+function Card({ title, children, className = "" }: { title: string | React.ReactNode; children: React.ReactNode; className?: string }) {
     return (
-        <div className={`bg-white rounded-lg border border-[#d4d6db] p-5 shadow-sm ${className}`}>
-            <h3 className="text-[16px] font-medium text-[#264769]">{title}</h3>
+        <div className={`bg-white rounded-lg border border-[#d4d6db] p-5 shadow-sm h-full ${className}`}>
+            <h3 className="text-[16px] font-medium text-[#264769] flex items-center">{title}</h3>
             {children}
+        </div>
+    );
+}
+
+function MatrixCellNew({ color, count }: { color: 'red' | 'pink' | 'orange' | 'cream'; count: number }) {
+    const bgColors = {
+        red: 'bg-[#ec0139] text-white',
+        pink: 'bg-[#ffe5eb] text-[#b5153a]',
+        orange: 'bg-[#ffe5c2] text-[#bf360c]',
+        cream: 'bg-[#fff5db] text-[#8a6300]',
+    };
+    
+    return (
+        <div className={`${bgColors[color]} w-full h-[45px] rounded-[8px] flex items-center justify-center font-medium text-[18px] relative group`}>
+            {count}
+            {/* Tooltip mock */}
+            <div className="absolute bottom-full mb-2 hidden group-hover:block bg-black/80 text-white text-xs px-2 py-1 rounded whitespace-nowrap z-10">
+                {count} items
+            </div>
         </div>
     );
 }
@@ -347,8 +406,11 @@ function MatrixCell({ color, count }: { color: 'red' | 'orange' | 'yellow' | 'gr
         green: 'bg-[#156c42]',
     };
     
+    // Determine text color based on background
+    const textColor = color === 'yellow' ? 'text-[#264769]' : 'text-white';
+    
     return (
-        <div className={`${bgColors[color]} h-10 w-full rounded flex items-center justify-center text-white font-bold cursor-pointer hover:opacity-90 transition-opacity relative group`}>
+        <div className={`${bgColors[color]} ${textColor} min-h-[60px] h-[80px] w-full rounded-lg flex items-center justify-center font-bold text-[28px] cursor-pointer hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)] transition-all duration-200 relative group`}>
             {count}
             {/* Tooltip mock */}
             <div className="absolute bottom-full mb-2 hidden group-hover:block bg-black/80 text-white text-xs px-2 py-1 rounded whitespace-nowrap z-10">
@@ -367,10 +429,10 @@ function SummaryCard({ label, count, subLabel, color }: { label: string; count: 
     };
 
     return (
-        <div className={`bg-white border border-[#d4d6db] ${borderColors[color]} border-l-4 rounded p-3 shadow-sm flex flex-col`}>
-            <span className="text-xs text-[#5b626e]">{label}</span>
-            <span className="text-xl font-medium text-[#264769] mt-1">{count}</span>
-            {subLabel && <span className="text-[10px] text-[#ec0139] mt-1 font-medium">{subLabel}</span>}
+        <div className={`bg-white border border-[#d4d6db] ${borderColors[color]} border-l-4 rounded p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08)] flex flex-col`}>
+            <span className="text-[32px] font-bold text-[#264769]">{count}</span>
+            <span className="text-[12px] text-[#5b626e] mt-1">{label}</span>
+            {subLabel && <span className="text-[10px] text-[#ec0139] mt-2 font-medium">{subLabel}</span>}
         </div>
     );
 }
